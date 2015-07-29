@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 
 # References
+# http://blog.samsandberg.com/2015/01/13/tuesdays-and-kenken/
+# https://en.wikipedia.org/wiki/Latin_square
+# https://gist.github.com/loisaidasam/507e82157d670023500b
 # http://en.wikipedia.org/wiki/KenKen
 # https://docs.python.org/2/library/itertools.html
 
