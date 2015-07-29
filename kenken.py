@@ -6,6 +6,7 @@
 
 import argparse
 import itertools
+import random
 
 
 def check_board(board, cardinality):
@@ -25,13 +26,30 @@ def check_board(board, cardinality):
     return True
 
 
-def get_boards(cardinality):
+def _get_items(cardinality):
     items = []
     for item in xrange(1, cardinality+1):
         for i in xrange(cardinality):
             items.append(item)
+    return items
+
+
+def _get_boards_permutations(cardinality):
+    items = _get_items(cardinality)
     items = ''.join(map(str, items))
     return itertools.permutations(items, len(items))
+
+
+def _get_boards_random(cardinality):
+    items = _get_items(cardinality)
+    while True:
+        random.shuffle(items)
+        yield tuple(items)
+
+
+def get_boards(cardinality):
+    # return _get_boards_permutations(cardinality)
+    return _get_boards_random(cardinality)
 
 
 def get_num_combinations(cardinality, verbose=False):
@@ -42,7 +60,11 @@ def get_num_combinations(cardinality, verbose=False):
     seen = set()
     for i, board in enumerate(get_boards(cardinality), 1):
         if i % 1000000 == 0:
-            print "checking board %s ..." % i
+            print "%s / %s checking board %s ..." % (
+                results[True],
+                results[False],
+                i,
+            )
         if board in seen:
             continue
         result = check_board(board, cardinality)
